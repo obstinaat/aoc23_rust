@@ -3,8 +3,7 @@ fn first_digit(line: &str) -> u32{
     for c in line.chars(){
         if c.is_digit(10){
             digit = c.to_digit(10).unwrap();
-            break;
-
+            return digit;
         }
     }
     digit
@@ -22,12 +21,11 @@ fn main() {
 
     for line in  include_str!("input.txt")
         .replace("\r\n", "\n")
-        .split("\n\n")
+        .split("\n")
     {
         let sum = first_digit(line)*10 + last_digit(line);
         totalsum += sum;
-        println!("{line}, {totalsum}");
     }
 
-    // println!("{totalsum}");
+    println!("{totalsum}");
 }
