@@ -1,6 +1,6 @@
 fn first_digit(mut line: &str) -> u32{
     let mut digit = 0;
-    while line.len() > 1 {
+    while line.len() > 0 {
         for word in WORDS{
             if line.starts_with(word.0) || line.starts_with(&word.1.to_string()){
                 digit = word.1;
@@ -9,7 +9,6 @@ fn first_digit(mut line: &str) -> u32{
         }
         line = &line[1..];
     }
-
     digit
 }
 
@@ -18,7 +17,7 @@ fn last_digit(line: &str) -> u32{
     let mut reversed_line: &str = &reverse;
     let mut digit = 0;
 
-    while reversed_line.len() > 1{ 
+    while reversed_line.len() > 0{ 
         for reversed_word in WORDS.into_iter().map(|x| reverse_word(x)){
             if reversed_line.starts_with(&reversed_word.0) || reversed_line.starts_with(&reversed_word.1.to_string()){
                 digit = reversed_word.1;
