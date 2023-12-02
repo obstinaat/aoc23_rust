@@ -1,3 +1,3 @@
 # aoc23_rust
 
-My entry for advent of code 2023 (https://adventofcode.com/) in rust.
+My entry for advent of code 2023 (https://adventofcode.com/) in rust or sometimes a different language hehe
