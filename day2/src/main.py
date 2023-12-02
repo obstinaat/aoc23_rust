@@ -6,6 +6,7 @@ file = open('input.txt')
 
 
 sum_ids = 0
+sum_pow = 0
 
 MAX_RED = 12
 MAX_GREEN = 13
@@ -46,13 +47,16 @@ for line in file.readlines():
     possible = True
     game_id = getGameId(line)
     sets = getSets(line)
+    max_red = 0
+    max_blue = 0
+    max_green = 0
+
     for set in sets:
         count_red = 0
         count_blue = 0
         count_green = 0
 
         for draw in getDraws(set):
-            print("draw", draw)
             color = getColor(draw)
             count = getCount(draw)
             if color == COLOR.GREEN:
@@ -61,21 +65,25 @@ for line in file.readlines():
                 count_red += count
             if color == COLOR.BLUE:
                 count_blue += count
-        
+        if count_red > max_red:
+            max_red = count_red
+        if count_blue > max_blue:
+            max_blue = count_blue
+        if count_green > max_green:
+            max_green = count_green
+
         if count_red > MAX_RED:
             possible= False
-            break
         if count_blue > MAX_BLUE:
             possible= False
-            break
         if count_green > MAX_GREEN:
             possible= False
-            break
 
-        print("red: ", count_red, "blue: ", count_blue, "green: ", count_green)
     if possible: 
         sum_ids += game_id
+    power = max_red * max_green * max_blue
+    sum_pow += power
 
-print(sum_ids)
+print(sum_ids, sum_pow)
 
 
