@@ -1,10 +1,10 @@
 main :: IO ()
 
 countOpen :: [Char] -> Int
-countOpen input = length (filter (isOpenParen) input)
+countOpen input = length (filter isOpenParen input)
 
 countClose :: [Char] -> Int
-countClose input = length (filter (isCloseParen) input)
+countClose input = length (filter isCloseParen input)
 
 isOpenParen :: Char -> Bool
 isOpenParen c = c == '('
