@@ -1,4 +1,4 @@
-file = open('input.txt')
+import time
 
 def take_card(line):
     split = line.split(":")
@@ -31,36 +31,37 @@ def calc_matches(winners, drawn):
 
 sum_of_points = 0
 
-cards = []
-lines = []
-for line in file.readlines():
-    lines.append(line)
-    card, rest = take_card(line)
-    winners, drawn = read_card(rest)
-    cards.append((1,winners, drawn))
+def main():
+    cards = []
+    lines = []
+    start_time = time.time_ns()
+    for line in file.readlines():
+        lines.append(line)
+        card, rest = take_card(line)
+        winners, drawn = read_card(rest)
+        cards.append((1,winners, drawn))
+    print("--- %s reading the file: ---" % (time.time_ns() - start_time))
+   
     
-for (i,card) in enumerate(cards):
-    (occurences, winners, drawn) = card
-    matches = calc_matches(winners, drawn)
-    for j in range(i+1, i+matches+1):
-        if j < len(cards):
-            (_occurences, _winners, _drawn) = cards[j]
-            cards[j] = (_occurences+occurences, _winners, _drawn)
+    for (i,card) in enumerate(cards):
+        (occurences, winners, drawn) = card
+        matches = calc_matches(winners, drawn)
+        for j in range(i+1, i+matches+1):
+            if j < len(cards):
+                (_occurences, _winners, _drawn) = cards[j]
+                cards[j] = (_occurences+occurences, _winners, _drawn)
 
-number_of_cards = 0
-for (occurences, _, _ ) in cards:
-    number_of_cards+= occurences
+    number_of_cards = 0
+    for (occurences, _, _ ) in cards:
+        number_of_cards+= occurences
 
-print(number_of_cards)
-
-
-# print("added card ", j, "because", i, " has ", matches, "matches")
-    
+    print(number_of_cards)
 
 
-
-
-
+start_time = time.time_ns()
+file = open('input.txt')
+main()
+print("--- %s seconds ---" % ((time.time_ns() - start_time)/(10**6)))
 
 #part 1
 # for line in file.readlines():
