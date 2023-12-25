@@ -1,3 +1,5 @@
+use std::time::Instant;
+
 use regex::Regex;
 
 
@@ -46,7 +48,7 @@ fn part1() {
 }
 
 
-fn part2(){
+fn part2_brute(){
     let t = 59688274; // gotten manually from input
     let d:u64 = 543102016641022; // should be fine for now ;)
 
@@ -60,7 +62,20 @@ fn part2(){
     println!("The answer to part 2 is {:?}", possibilities);
 }
 
+fn part2_quick(){
+    let t:u64 = 59688274; 
+    let d:u64 = 543102016641022;
+
+    let disc:f64 = (t.pow(2) - 4 * 1 * d) as f64; //b^2 - 4ac 
+    let (x1,x2) = (t as f64 - disc.sqrt() / 2.0, t as f64 + disc.sqrt() / 2.0);
+
+    println!{"The answer to part 2 yet again is {:?}",(x2.floor() - x1.floor()) as usize};
+}
+
 fn main() {
     part1();
-    part2();
+    let start = Instant::now();
+    part2_brute();
+    part2_quick();
+    println!("--- Time: {:1.3?} ---\n", start.elapsed());
 }
